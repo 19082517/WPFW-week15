@@ -2,16 +2,32 @@
     ViewData["Title"] = "Home Page";
 }
 
-<form name="Students" method="post" action="JavaScript: getStudent();">
+<form class="d-inline-flex flex-column" method="get" action="JavaScript: getStudent();">
 
     <div id="studs"></div>
-    <div id="errorMelding"></div>
-    <br />
-    <select class="ml-2" name="student" id="studentList"
-            onchange="jQuery('form').submit()"></select>
+    <div class="mt-1" id="errorMelding"></div>
+    <select class="mt-2" name="student" id="studentList"
+            onchange="jQuery('form').submit()">
+    </select>
     
-    <input class="btn btn-primary" type="button" id="getButton" value="Haal studenten op"
+    <input class="btn btn-primary mt-1" type="button" id="getButton" value="Get students"
            onclick="getStudents()" />
+
+    <h4 class="mt-4">Create student</h4>
+    <input id="newName" class="mt-2" name="Name" type="text" />
+    <input id="newAge" class="mt-1" name="Age" type="text" />
+    <input class="btn btn-primary mt-1" type="button" id="AddButton" value="Add student"
+           onclick="addStudent()" />
+    
+    <h4 class="mt-4">Edit student</h4>
+    <input id="editName" class="mt-2" name="Name" type="text" />
+    <input id="editAge" class="mt-1" name="Age" type="text" />
+    <input class="btn btn-primary mt-1" type="button" id="EditButton" value="Edit student"
+           onclick="editStudent()" />
+    
+    <h4 class="mt-4">Delete student</h4>
+    <input class="btn btn-primary mt-2" type="button" id="DeleteButton" value="Delete student"
+               onclick="deleteStudent()" />
 </form>
 
 @section Scripts

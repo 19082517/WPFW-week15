@@ -1,21 +1,66 @@
 ﻿function getStudent()
 {
-    fetch('/GetStudent?id=' + document.getElementById("studentList").value)
+    fetch('/Home/GetStudent/' + document.getElementById("studentList").value)
         .then(res => res.json())
-        .then(stud => document.getElementById('studs').innerHTML += stud.Name + " is " + stud.Age + " years old")
+        .then(stud => {
+            document.getElementById('studs').innerHTML = stud.name + " is " + stud.age + " years old" ;
+            document.getElementById("editName").value = stud.name;
+            document.getElementById("editAge").value = stud.age;
+        })
         .catch(e => document.getElementById("errorMelding").innerHTML = e);
 }
 
-function getStudents() {
+function getStudents() 
+{
+    document.getElementById("studentList").innerHTML = "";
+    
     fetch('/Home/GetStudents')
         .then(res => res.json())
         .then(stud => {
-            for (const s of stud) {
+            stud.forEach(s => {
+                console.log(s);
                 let option = document.createElement("option");
-                option.value = s.Id;
-                option.text = s.Name;
+                option.value = s.id;
+                option.text = s.name;
                 document.getElementById("studentList").appendChild(option);
-            }
+            })
         })
         .catch(e => document.getElementById("errorMelding").innerHTML = e);
+}
+
+function addStudent()
+{
+    let formData = new FormData();
+    formData.append('Name', document.getElementById("newName").value);
+    formData.append('Age', document.getElementById("newAge").value);
+
+    return fetch("/Home/AddStudent",
+        {
+            body: formData,
+            method: "post"
+        })
+        .then(response => response.json());
+}
+
+function editStudent()
+{
+    let formData = new FormData();
+    formData.append('Name', document.getElementById("editName").value);
+    formData.append('Age', document.getElementById("editAge").value);
+
+    return fetch("/Home/EditStudent/" + document.getElementById("studentList").value,
+        {
+            body: formData,
+            method: "put"
+        })
+        .then(response => response.json());
+}
+
+function deleteStudent()
+{
+    return fetch("/Home/DeleteStudent/" + document.getElementById("studentList").value,
+        {
+            method: "delete"
+        })
+        .then(response => response.json());
 }

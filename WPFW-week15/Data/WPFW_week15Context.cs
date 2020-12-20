@@ -14,6 +14,6 @@ namespace WPFW_week15.Data
         {
         }
 
-        public DbSet<WPFW_week15.Models.Student> Student { get; set; }
+        public DbSet<Student> Student { get; set; }
     }
 }
