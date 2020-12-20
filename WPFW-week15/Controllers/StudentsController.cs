@@ -48,7 +48,7 @@ namespace WPFW_week15.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
-            if (id != student.StudentId)
+            if (id != student.Id)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace WPFW_week15.Controllers
             _context.Student.Add(student);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
+            return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
         }
 
         // DELETE: api/Students/5
@@ -104,7 +104,7 @@ namespace WPFW_week15.Controllers
 
         private bool StudentExists(int id)
         {
-            return _context.Student.Any(e => e.StudentId == id);
+            return _context.Student.Any(e => e.Id == id);
         }
     }
 }

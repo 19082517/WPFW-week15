@@ -2,7 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form name="Students" method="post" action="JavaScript: getStudent();">
+
+    <div id="studs"></div>
+    <div id="errorMelding"></div>
+    <br />
+    <select class="ml-2" name="student" id="studentList"
+            onchange="jQuery('form').submit()"></select>
+    
+    <input class="btn btn-primary" type="button" id="getButton" value="Haal studenten op"
+           onclick="getStudents()" />
+</form>
+
+@section Scripts
+{
+    <script src="~/js/student.js"></script>
+}

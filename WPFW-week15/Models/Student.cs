@@ -8,8 +8,7 @@ namespace WPFW_week15.Models
 {
     public class Student
     {
-        [Key]
-        public int StudentId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
     }
