@@ -59,17 +59,17 @@ namespace WPFW_week15.Controllers
             return new JsonResult(HttpStatusCode.OK);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public JsonResult EditStudent(int id, [FromForm] Student student)
         {
             if (id != student.Id) return new JsonResult(HttpStatusCode.BadRequest);
             
-            _context.Student.Update(student);
+            _context.Entry(student).State = EntityState.Modified;
             _context.SaveChanges();
             return new JsonResult(HttpStatusCode.OK);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public JsonResult DeleteStudent(int id)
         {
             if (!_context.Student.Any(s => s.Id == id)) return new JsonResult(HttpStatusCode.BadRequest);

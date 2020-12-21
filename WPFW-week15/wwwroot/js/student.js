@@ -1,6 +1,6 @@
 ﻿function getStudent()
 {
-    fetch('/Home/GetStudent/' + document.getElementById("studentList").value)
+    return fetch('/Home/GetStudent/' + document.getElementById("studentList").value)
         .then(res => res.json())
         .then(stud => {
             document.getElementById('studs').innerHTML = stud.name + " is " + stud.age + " years old" ;
@@ -14,7 +14,7 @@ function getStudents()
 {
     document.getElementById("studentList").innerHTML = "";
     
-    fetch('/Home/GetStudents')
+    return fetch('/Home/GetStudents')
         .then(res => res.json())
         .then(stud => {
             stud.forEach(s => {
@@ -39,12 +39,14 @@ function addStudent()
             body: formData,
             method: "post"
         })
-        .then(response => response.json());
+        .then(response => response.json())
+        .catch(e => document.getElementById("errorMelding").innerHTML = e);
 }
 
 function editStudent()
 {
     let formData = new FormData();
+    formData.append('Id', document.getElementById("studentList").value);
     formData.append('Name', document.getElementById("editName").value);
     formData.append('Age', document.getElementById("editAge").value);
 
@@ -53,7 +55,8 @@ function editStudent()
             body: formData,
             method: "put"
         })
-        .then(response => response.json());
+        .then(response => response.json())
+        .catch(e => document.getElementById("errorMelding").innerHTML = e);
 }
 
 function deleteStudent()
@@ -62,5 +65,6 @@ function deleteStudent()
         {
             method: "delete"
         })
-        .then(response => response.json());
+        .then(response => response.json())
+        .catch(e => document.getElementById("errorMelding").innerHTML = e);
 }

@@ -2,12 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-<form class="d-inline-flex flex-column" action="JavaScript: getStudent();">
+<div class="d-inline-flex flex-column">
 
     <div id="studs"></div>
     <div class="mt-1" id="errorMelding"></div>
     <select class="mt-2" name="student" id="studentList"
-            onchange="jQuery('form').submit()">
+            onchange="getStudent();">
     </select>
     
     <input class="btn btn-primary mt-1" type="button" id="getButton" value="Get students"
@@ -28,7 +28,7 @@
     <h4 class="mt-4">Delete student</h4>
     <input class="btn btn-primary mt-2" type="button" id="DeleteButton" value="Delete student"
                onclick="deleteStudent()" />
-</form>
+</div>
 
 @section Scripts
 {
